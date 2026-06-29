@@ -4,9 +4,8 @@ from tavily import TavilyClient
 
 # Load API keys from .env file
 load_dotenv()
-
-# Connect to Tavily using your API key
-client = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
+TAVILY_KEY = os.getenv("TAVILY_API_KEY") or st.secrets.get("TAVILY_API_KEY")
+client = TavilyClient(api_key=TAVILY_KEY)
 
 def search_topic(topic):
     """Search the web for a given topic and return results"""
