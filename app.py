@@ -4,13 +4,13 @@ from report import generate_report
 
 # Page settings
 st.set_page_config(
-    page_title="AI Research Assistant",
-    page_icon="🔬",
+    page_title="Petal — AI Research Assistant",
+    page_icon="🌸",
     layout="wide"
 )
 
 # Title
-st.title("🔬 AI Research Assistant")
+st.title("🌸 Petal — AI Research Assistant")
 st.subheader("Enter any topic and get a comprehensive research report!")
 
 # Input box
