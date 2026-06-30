@@ -13,7 +13,7 @@ st.set_page_config(
 st.markdown("""
 <style>
     .stApp {
-        background: linear-gradient(135deg, #fff0f5 0%, #f3e8ff 50%, #ffe4ec 100%);
+        background: linear-gradient(135deg, #1a1625 0%, #211a2e 50%, #251a28 100%);
     }
     
     h1 {
@@ -23,11 +23,21 @@ st.markdown("""
         font-weight: 800;
     }
     
+    .stMarkdown, p, label, span {
+        color: #e8d9f0 !important;
+    }
+    
     .stTextInput input {
         border-radius: 20px;
-        border: 2px solid #f8c8dc;
+        border: 2px solid #c9a7ff;
         padding: 12px 20px;
-        background-color: #fff;
+        background-color: #2a2238;
+        color: #ffffff;
+    }
+    
+    .stTextInput input::placeholder {
+        color: #b39ddb;
+        opacity: 0.7;
     }
     
     .stButton button {
@@ -49,62 +59,30 @@ st.markdown("""
     
     .stDownloadButton button {
         background: linear-gradient(90deg, #ffb6c1, #d8b4fe);
-        color: white;
+        color: #1a1625;
         border-radius: 30px;
         border: none;
         font-weight: 600;
     }
     
-    h2 {
-        color: #c084a3;
-        border-bottom: 3px solid #f8c8dc;
+    h2, h3 {
+        color: #ffb6c1 !important;
+        border-bottom: 2px solid #c9a7ff;
         padding-bottom: 8px;
     }
     
-    .stMarkdown {
-        font-family: 'Trebuchet MS', sans-serif;
+    .stAlert {
+        background-color: #2a2238;
+        border-radius: 15px;
     }
     
     [data-testid="stSpinner"] {
         color: #c9a7ff;
     }
+    
+    code {
+        background-color: #3a2e4f !important;
+        color: #ffb6c1 !important;
+    }
 </style>
 """, unsafe_allow_html=True)
-
-# Title
-st.title("🌸 Petal — AI Research Assistant")
-st.markdown("##### ✨ Drop a topic, get the tea — instant research, zero effort")
-
-st.write("")
-
-# Input box
-topic = st.text_input("", placeholder="✍️ e.g. AI Agents, Climate Change, K-pop industry...")
-
-# Button
-if st.button("Generate Report ✨🚀"):
-    
-    if topic.strip() == "":
-        st.warning("babe you forgot to type a topic 👀")
-    
-    else:
-        # Search the web
-        with st.spinner("🔍 stalking the internet for you..."):
-            results = search_topic(topic)
-        
-        st.success(f"💅 found {len(results)} solid sources!")
-        
-        # Generate report
-        with st.spinner("🧠 AI is cooking your report..."):
-            report = generate_report(topic, results)
-        
-        # Show the report
-        st.markdown("---")
-        st.markdown(report)
-        
-        # Download button
-        st.download_button(
-            label="📥 save this report bestie",
-            data=report,
-            file_name=f"{topic}_report.txt",
-            mime="text/plain"
-        )
