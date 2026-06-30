@@ -9,7 +9,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# Custom CSS for pastel peachy/lavender theme
+# Custom CSS for dark pastel theme
 st.markdown("""
 <style>
     .stApp {
@@ -86,3 +86,41 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
+
+# Title
+st.title("🌸 Petal — AI Research Assistant")
+st.markdown("##### ✨ Drop a topic, get the tea — instant research, zero effort")
+
+st.write("")
+
+# Input box
+topic = st.text_input("", placeholder="✍️ e.g. AI Agents, Climate Change, K-pop industry...")
+
+# Button
+if st.button("Generate Report ✨🚀"):
+    
+    if topic.strip() == "":
+        st.warning("babe you forgot to type a topic 👀")
+    
+    else:
+        # Search the web
+        with st.spinner("🔍 stalking the internet for you..."):
+            results = search_topic(topic)
+        
+        st.success(f"💅 found {len(results)} solid sources!")
+        
+        # Generate report
+        with st.spinner("🧠 AI is cooking your report..."):
+            report = generate_report(topic, results)
+        
+        # Show the report
+        st.markdown("---")
+        st.markdown(report)
+        
+        # Download button
+        st.download_button(
+            label="📥 save this report bestie",
+            data=report,
+            file_name=f"{topic}_report.txt",
+            mime="text/plain"
+        )
